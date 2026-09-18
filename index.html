@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Urban Pulse — Civic Intelligence</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','ui-sans-serif','system-ui']}}}}
+</script>
+<style>
+body{background:#07111f}.glass{background:rgba(15,29,48,.78);backdrop-filter:blur(12px);border:1px solid rgba(148,163,184,.13)}
+.gridbg{background-image:linear-gradient(rgba(100,116,139,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(100,116,139,.07) 1px,transparent 1px);background-size:34px 34px}
+.marker{animation:pulse 2s infinite}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.bar{transition:width .7s}.fade{animation:fade .35s}@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body class="text-slate-100 font-sans">
+<div class="min-h-screen gridbg">
+<header class="sticky top-0 z-30 bg-[#07111f]/90 backdrop-blur border-b border-slate-800">
+ <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+  <div class="flex items-center gap-3"><div class="w-11 h-11 rounded-2xl bg-cyan-400/15 border border-cyan-300/20 flex items-center justify-center text-xl">◉</div>
+   <div><div class="font-black tracking-wide text-lg">URBAN PULSE</div><div class="text-[10px] text-cyan-300 uppercase tracking-[.25em]">Civic Intelligence OS</div></div>
+  </div>
+  <div class="hidden md:flex gap-2 text-xs">
+   <button class="nav px-4 py-2 rounded-lg bg-cyan-400/10 text-cyan-200" onclick="show('dashboard',this)">Command Center</button>
+   <button class="nav px-4 py-2 rounded-lg text-slate-400 hover:text-white" onclick="show('report',this)">Report Issue</button>
+   <button class="nav px-4 py-2 rounded-lg text-slate-400 hover:text-white" onclick="show('simulator',this)">What‑If Simulator</button>
+   <button class="nav px-4 py-2 rounded-lg text-slate-400 hover:text-white" onclick="show('records',this)">Civic Ledger</button>
+  </div>
+  <div class="flex items-center gap-2 text-xs"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span> System Online</div>
+ </div>
+</header>
+
+<main class="max-w-7xl mx-auto p-5">
+<section id="dashboard" class="page fade">
+ <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+  <div><p class="text-cyan-300 text-sm font-semibold">SENSE • VERIFY • PREDICT • RESPOND • REWARD</p>
+   <h1 class="text-3xl md:text-4xl font-black mt-2">City Command Center</h1>
+   <p class="text-slate-400 mt-2 max-w-2xl">A live prototype for detecting civic issues, verifying reports, predicting risk and coordinating response.</p></div>
+  <button onclick="show('report')" class="px-5 py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold hover:bg-cyan-300">＋ Report an Issue</button>
+ </div>
+ <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+  <div class="glass rounded-2xl p-5"><div class="text-slate-400 text-xs">ACTIVE ISSUES</div><div id="active" class="text-3xl font-black mt-2">24</div><div class="text-amber-300 text-xs mt-2">↑ 3 today</div></div>
+  <div class="glass rounded-2xl p-5"><div class="text-slate-400 text-xs">AI VERIFIED TODAY</div><div id="verified" class="text-3xl font-black mt-2">18</div><div class="text-emerald-300 text-xs mt-2">91% avg confidence</div></div>
+  <div class="glass rounded-2xl p-5"><div class="text-slate-400 text-xs">HIGH-RISK ZONES</div><div class="text-3xl font-black mt-2">5</div><div class="text-rose-300 text-xs mt-2">2 need attention</div></div>
+  <div class="glass rounded-2xl p-5"><div class="text-slate-400 text-xs">CITIZEN POINTS</div><div id="points" class="text-3xl font-black mt-2">240</div><div class="text-cyan-300 text-xs mt-2">Top contributor: You</div></div>
+ </div>
+
+ <div class="grid lg:grid-cols-3 gap-5">
+  <div class="lg:col-span-2 glass rounded-2xl p-5">
+   <div class="flex justify-between items-center mb-4"><div><h2 class="font-bold text-lg">Live Civic Risk Map</h2><p class="text-xs text-slate-400">Simulated city/campus environment</p></div><span class="text-xs px-3 py-1 rounded-full bg-rose-400/10 text-rose-300">● 5 risk zones</span></div>
+   <div class="relative h-[370px] rounded-xl overflow-hidden bg-[#0a1a29] border border-slate-800">
+    <div class="absolute inset-0 opacity-50" style="background-image:linear-gradient(28deg,transparent 46%,#334155 47%,#334155 49%,transparent 50%),linear-gradient(100deg,transparent 45%,#334155 46%,#334155 48%,transparent 49%),linear-gradient(160deg,transparent 48%,#1e3a52 49%,#1e3a52 51%,transparent 52%);background-size:180px 120px"></div>
+    <div class="absolute left-[18%] top-[24%] marker w-5 h-5 rounded-full bg-rose-400 shadow-[0_0_22px_#fb7185]" title="Pothole"></div>
+    <div class="absolute left-[54%] top-[38%] marker w-5 h-5 rounded-full bg-amber-300 shadow-[0_0_22px_#fcd34d]" title="Waterlogging"></div>
+    <div class="absolute left-[73%] top-[67%] marker w-5 h-5 rounded-full bg-rose-400 shadow-[0_0_22px_#fb7185]" title="Garbage"></div>
+    <div class="absolute left-[36%] top-[70%] marker w-5 h-5 rounded-full bg-cyan-300 shadow-[0_0_22px_#67e8f9]" title="Streetlight"></div>
+    <div class="absolute left-[82%] top-[23%] marker w-5 h-5 rounded-full bg-emerald-300 shadow-[0_0_22px_#6ee7b7]" title="Resolved"></div>
+    <div class="absolute left-4 bottom-4 glass rounded-xl p-3 text-[11px] space-y-1"><div>🔴 Critical</div><div>🟡 Watch</div><div>🔵 Verified</div><div>🟢 Resolved</div></div>
+    <div class="absolute right-4 top-4 glass rounded-xl px-3 py-2 text-xs">Civic Health: <b class="text-amber-300">72/100</b></div>
+   </div>
+  </div>
+
+  <div class="glass rounded-2xl p-5">
+   <div class="flex justify-between"><div><h2 class="font-bold text-lg">AI Risk Forecast</h2><p class="text-xs text-slate-400">Next 6 hours</p></div><span class="text-xs text-cyan-300">LIVE</span></div>
+   <div class="mt-5 space-y-4">
+    <div class="rounded-xl bg-rose-400/5 border border-rose-400/15 p-4"><div class="flex justify-between"><b>Gate Road</b><span class="text-rose-300 text-xs">HIGH</span></div><p class="text-xs text-slate-400 mt-1">Waterlogging probability</p><div class="h-2 bg-slate-800 rounded mt-3"><div class="bar h-2 bg-rose-400 rounded" style="width:86%"></div></div><div class="text-right text-xs mt-1">86%</div></div>
+    <div class="rounded-xl bg-amber-300/5 border border-amber-300/15 p-4"><div class="flex justify-between"><b>Market Junction</b><span class="text-amber-300 text-xs">WATCH</span></div><p class="text-xs text-slate-400 mt-1">Traffic congestion</p><div class="h-2 bg-slate-800 rounded mt-3"><div class="bar h-2 bg-amber-300 rounded" style="width:64%"></div></div><div class="text-right text-xs mt-1">64%</div></div>
+    <div class="rounded-xl bg-cyan-300/5 border border-cyan-300/15 p-4"><div class="flex justify-between"><b>Hostel Block B</b><span class="text-cyan-300 text-xs">LOW</span></div><p class="text-xs text-slate-400 mt-1">Streetlight failure recurrence</p><div class="h-2 bg-slate-800 rounded mt-3"><div class="bar h-2 bg-cyan-300 rounded" style="width:31%"></div></div><div class="text-right text-xs mt-1">31%</div></div>
+   </div>
+   <button onclick="show('simulator')" class="w-full mt-4 py-3 rounded-xl border border-cyan-300/20 text-cyan-200 hover:bg-cyan-300/10 text-sm">Run What‑If Simulation →</button>
+  </div>
+ </div>
+
+ <div class="grid md:grid-cols-3 gap-5 mt-5">
+  <div class="glass rounded-2xl p-5"><div class="text-xs text-slate-400">AI VERIFICATION</div><h3 class="font-bold mt-2">Duplicate detected</h3><p class="text-xs text-slate-400 mt-1">3 reports near Gate Road were clustered into one civic event.</p><span class="inline-block mt-3 text-xs text-emerald-300">✓ Reduced noise</span></div>
+  <div class="glass rounded-2xl p-5"><div class="text-xs text-slate-400">RESPONSE ENGINE</div><h3 class="font-bold mt-2">Team dispatched</h3><p class="text-xs text-slate-400 mt-1">Maintenance Team A assigned to a high-priority pothole.</p><span class="inline-block mt-3 text-xs text-cyan-300">ETA 32 min</span></div>
+  <div class="glass rounded-2xl p-5"><div class="text-xs text-slate-400">TRANSPARENT RECORD</div><h3 class="font-bold mt-2">Civic action logged</h3><p class="text-xs text-slate-400 mt-1">Resolution event generated with a tamper-evident record ID.</p><span class="inline-block mt-3 text-xs text-violet-300">Ledger #UP-7A91</span></div>
+ </div>
+</section>
+
+<section id="report" class="page hidden fade">
+ <div class="max-w-3xl mx-auto"><button onclick="show('dashboard')" class="text-cyan-300 text-sm mb-4">← Back to Command Center</button>
+ <div class="glass rounded-2xl p-6 md:p-8"><p class="text-cyan-300 text-xs font-bold tracking-widest">SENSE → VERIFY</p><h1 class="text-3xl font-black mt-2">Report a Civic Issue</h1><p class="text-slate-400 mt-2">Submit a sample report and watch the verification pipeline run.</p>
+  <div class="grid md:grid-cols-2 gap-4 mt-6">
+   <label class="text-sm">Issue Type<select id="type" class="mt-2 w-full bg-slate-900 border border-slate-700 rounded-xl p-3"><option>Pothole</option><option>Waterlogging</option><option>Garbage Overflow</option><option>Broken Streetlight</option><option>Traffic Congestion</option></select></label>
+   <label class="text-sm">Location<select id="loc" class="mt-2 w-full bg-slate-900 border border-slate-700 rounded-xl p-3"><option>Gate Road</option><option>Main Market Junction</option><option>Hostel Block B</option><option>Library Road</option></select></label>
+  </div>
+  <label class="block text-sm mt-4">Description<textarea id="desc" class="mt-2 w-full h-28 bg-slate-900 border border-slate-700 rounded-xl p-3" placeholder="Example: Large pothole near the main gate..."></textarea></label>
+  <button id="verifyBtn" onclick="verify()" class="mt-5 w-full py-4 rounded-xl bg-cyan-400 text-slate-950 font-black">🤖 Submit & Verify with AI</button>
+  <div id="result" class="hidden mt-6"></div>
+ </div></div>
+</section>
+
+<section id="simulator" class="page hidden fade">
+ <div class="max-w-5xl mx-auto"><p class="text-cyan-300 text-sm font-semibold">PREDICT</p><h1 class="text-3xl font-black mt-2">What‑If Civic Simulator</h1><p class="text-slate-400 mt-2">Demonstrate how a city can move from reactive reporting to preventive action.</p>
+ <div class="grid lg:grid-cols-3 gap-5 mt-6">
+  <div class="glass rounded-2xl p-5"><h3 class="font-bold">Scenario</h3><div class="mt-5 space-y-3">
+   <button onclick="simulate('rain')" class="scenario w-full text-left p-4 rounded-xl border border-slate-700 hover:border-cyan-300/40">🌧️ <b>Heavy Rain</b><div class="text-xs text-slate-400 mt-1">Simulate waterlogging risk</div></button>
+   <button onclick="simulate('traffic')" class="scenario w-full text-left p-4 rounded-xl border border-slate-700 hover:border-cyan-300/40">🚗 <b>Peak Traffic</b><div class="text-xs text-slate-400 mt-1">Simulate congestion hotspots</div></button>
+   <button onclick="simulate('waste')" class="scenario w-full text-left p-4 rounded-xl border border-slate-700 hover:border-cyan-300/40">🗑️ <b>Waste Surge</b><div class="text-xs text-slate-400 mt-1">Simulate overflow risk</div></button>
+  </div></div>
+  <div class="lg:col-span-2 glass rounded-2xl p-5"><div class="flex justify-between"><h3 class="font-bold">Predicted Impact</h3><span id="simTag" class="text-xs text-slate-400">Choose a scenario</span></div>
+   <div id="simMap" class="mt-4 h-64 rounded-xl bg-[#0a1a29] border border-slate-800 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-40" style="background-image:linear-gradient(25deg,transparent 46%,#334155 47%,#334155 49%,transparent 50%),linear-gradient(100deg,transparent 45%,#334155 46%,#334155 48%,transparent 49%);background-size:180px 120px"></div>
+    <div id="simDots" class="absolute inset-0"></div>
+    <div class="absolute bottom-3 left-3 text-xs text-slate-400">Risk heatmap preview</div>
+   </div>
+   <div id="simText" class="mt-4 text-sm text-slate-400">Run a scenario to generate a prediction and recommended response.</div>
+  </div>
+ </div>
+ </div>
+</section>
+
+<section id="records" class="page hidden fade">
+ <div class="flex justify-between items-end mb-5"><div><p class="text-violet-300 text-sm font-semibold">RESPOND → REWARD → RECORD</p><h1 class="text-3xl font-black mt-2">Civic Action Ledger</h1><p class="text-slate-400 mt-2">Demo of a transparent civic record layer.</p></div><span class="px-3 py-2 rounded-lg bg-violet-400/10 text-violet-300 text-xs">BLOCKCHAIN-READY</span></div>
+ <div class="glass rounded-2xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-sm"><thead class="text-xs uppercase text-slate-500 border-b border-slate-800"><tr><th class="text-left p-4">Issue</th><th class="text-left p-4">Status</th><th class="text-left p-4">Action</th><th class="text-left p-4">Record ID</th></tr></thead>
+ <tbody id="ledger"><tr class="border-b border-slate-800"><td class="p-4">Pothole · Gate Road</td><td class="p-4 text-emerald-300">Resolved</td><td class="p-4">Maintenance Team A</td><td class="p-4 text-violet-300">UP-7A91</td></tr><tr class="border-b border-slate-800"><td class="p-4">Waterlogging · Gate Road</td><td class="p-4 text-amber-300">Predicted</td><td class="p-4">Drainage Team</td><td class="p-4 text-violet-300">UP-3C20</td></tr><tr><td class="p-4">Streetlight · Hostel B</td><td class="p-4 text-cyan-300">Assigned</td><td class="p-4">Electrical Team</td><td class="p-4 text-violet-300">UP-91F2</td></tr></tbody></table></div></div>
+ <div class="mt-5 grid md:grid-cols-3 gap-4"><div class="glass rounded-xl p-4"><b>🔐 Tamper-evident</b><p class="text-xs text-slate-400 mt-1">Prototype record IDs represent a future smart-contract/ledger layer.</p></div><div class="glass rounded-xl p-4"><b>👥 Citizen trust</b><p class="text-xs text-slate-400 mt-1">Citizens can see the lifecycle of their report.</p></div><div class="glass rounded-xl p-4"><b>⭐ Reward loop</b><p class="text-xs text-slate-400 mt-1">Valid reports add civic points in this demo.</p></div></div>
+ </div>
+</section>
+</main>
+<footer class="max-w-7xl mx-auto px-5 py-8 text-xs text-slate-500 flex justify-between"><span>URBAN PULSE · Grand Hack IPEC · CodeHacks</span><span>Prototype / Demo Data</span></footer>
+</div>
+
+<script>
+const pages=['dashboard','report','simulator','records'];
+function show(id,btn){
+ pages.forEach(p=>document.getElementById(p).classList.toggle('hidden',p!==id));
+ document.querySelectorAll('.nav').forEach(x=>x.classList.remove('bg-cyan-400/10','text-cyan-200'));
+ if(btn)btn.classList.add('bg-cyan-400/10','text-cyan-200');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function verify(){
+ const btn=document.getElementById('verifyBtn'), out=document.getElementById('result');
+ btn.disabled=true;btn.textContent='⏳ AI is verifying report...';out.className='hidden mt-6';
+ setTimeout(()=>{
+  const type=document.getElementById('type').value, loc=document.getElementById('loc').value;
+  out.innerHTML=`<div class="rounded-2xl border border-emerald-300/20 bg-emerald-300/5 p-5 fade">
+   <div class="flex justify-between"><div><div class="text-xs text-emerald-300 font-bold">✓ VERIFIED REPORT</div><h3 class="font-black text-xl mt-1">${type} · ${loc}</h3></div><div class="text-right"><div class="text-2xl font-black text-emerald-300">92%</div><div class="text-[10px] text-slate-400">AI CONFIDENCE</div></div></div>
+   <div class="grid sm:grid-cols-3 gap-3 mt-5 text-xs"><div class="bg-slate-900/70 rounded-xl p-3">🔎 Duplicate check<br><b class="text-emerald-300">No duplicate</b></div><div class="bg-slate-900/70 rounded-xl p-3">📍 Location check<br><b class="text-emerald-300">Valid</b></div><div class="bg-slate-900/70 rounded-xl p-3">🚨 Priority<br><b class="text-amber-300">HIGH</b></div></div>
+   <div class="mt-4 p-4 rounded-xl bg-slate-900/70 text-sm">🔮 <b>Prediction:</b> Similar incidents suggest this location may become a higher-risk zone if unresolved.</div>
+   <div class="mt-4 flex flex-wrap gap-2"><span class="px-3 py-2 rounded-lg bg-cyan-400/10 text-cyan-200 text-xs">Response team queued</span><span class="px-3 py-2 rounded-lg bg-violet-400/10 text-violet-200 text-xs">Ledger ID: UP-${Math.floor(Math.random()*9000+1000)}</span><span class="px-3 py-2 rounded-lg bg-amber-300/10 text-amber-200 text-xs">+10 Civic Points</span></div>
+  </div>`;out.classList.remove('hidden');btn.disabled=false;btn.textContent='🤖 Submit & Verify with AI';
+  document.getElementById('verified').textContent=19;document.getElementById('points').textContent=250;
+ },1500);
+}
+function simulate(kind){
+ const data={rain:{tag:'HIGH RISK',title:'Heavy Rain Scenario',text:'3 zones may experience waterlogging. Pre-position drainage teams at Gate Road and Market Junction. Estimated preventive actions: 2.'},traffic:{tag:'WATCH',title:'Peak Traffic Scenario',text:'2 junctions may cross the congestion threshold. Recommend traffic diversion and signal optimization before peak load.'},waste:{tag:'HIGH RISK',title:'Waste Surge Scenario',text:'4 collection points may approach overflow. Recommend an extra collection route and earlier pickup.'}}[kind];
+ document.getElementById('simTag').textContent=data.tag;document.getElementById('simTag').className='text-xs text-amber-300 font-bold';
+ document.getElementById('simText').innerHTML='<b>'+data.title+'</b><p class="mt-2 text-slate-400">'+data.text+'</p>';
+ document.getElementById('simDots').innerHTML='';
+ const pos=[[18,30],[48,55],[72,35],[82,70],[33,75]];
+ pos.slice(0,kind==='rain'?5:kind==='traffic'?3:4).forEach((p,i)=>{let d=document.createElement('div');d.className='absolute w-7 h-7 rounded-full bg-rose-400/80 marker';d.style.left=p[0]+'%';d.style.top=p[1]+'%';d.title='Predicted risk';document.getElementById('simDots').appendChild(d)});
+}
+</script>
+</body></html>
